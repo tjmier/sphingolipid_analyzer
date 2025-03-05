@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphingolipid_analyzer"
+version = "0.1.0"
+description = "GUI application for processing and visualizing sphingolipid mass spectrometry data"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Tristen Mier", email = "tjmier96@gmail.com" }
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "pandas>=1.3.0",
+    "matplotlib>=3.4.0",
+    "PyQt5>=5.15.0",
+    "scipy>=1.7.0",
+    "pyteomics>=4.5.0",
+    "plotly>=5.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "black>=22.3.0",
+    "pyinstaller>=5.0.0",
+]
+
+[tool.setuptools]
+packages = ["sphingolipid_analyzer"]
+
+[project.gui-scripts]
+sphingolipid_analyzer = "sphingolipid_analyzer.main:main"
+
+[tool.ruff]
+
+# The target Python version for the code.
+target-version = "py311"
+
+# The list of rules to include. "ALL" means include all the rules, including new ones.
+select = [
+    "ALL", # include all the rules, including new ones
+]
+
+# The list of rules to ignore, categorized for clarity.
+ignore = [
+    #### modules
+    # "ANN", # flake8-annotations: ignore missing or incorrect type annotations.
+    # "COM", # flake8-commas: ignore rules related to commas.
+    # "C90", # mccabe complexity: ignore cyclomatic complexity checks.
+    # "DJ",  # django: ignore Django-specific linting rules.
+    # "EXE", # flake8-executable: ignore checks for executable scripts.
+    # "T10", # debugger: ignore checks related to debugger statements.
+    # "TID", # flake8-tidy-imports: ignore tidy imports rules.
+
+    #### specific rules
+    "COM812", # ignore missing trailing comma in a single-line list.
+    # "D100",   # ignore missing docstring in public module.
+    # "D101",   # ignore missing docstring in public class.
+    # "D102",   # ignore missing docstring in public method.
+    "D103",   # ignore missing docstring in public function.
+    # "D104",   # ignore missing docstring in public package.
+    # "D105",   # ignore missing docstring in magic method.
+    # "D106",   # ignore missing docstring in public nested class.
+    # "D107",   # ignore missing docstring in public init method.
+    # "D200",   # ignore one-line docstring should fit on one line with quotes.
+    "D205",   # ignore 1 blank line required between summary line and description.
+    "D212",   # ignore multi-line docstring summary should start at the first line.
+    # "D400",   # ignore first line should end with a period.
+    "D401",   # ignore first line should be in imperative mood.
+    # "D415",   # ignore first line should end with a period.
+    # "E402",   # ignore module level import not at top of file (false positives for local imports).
+    # "E501",   # ignore line too long.
+    "TRY003", # ignore verbose exception messages in try/except blocks.
+    # "TD002",  # ignore verbose TODO comments.
+    # "TD003",  # ignore verbose FIXME comments.
+    # "FIX002", # ignore verbose descriptions of TODOs.
+]
+
+# List of rules to ignore in testing directory
+[tool.ruff.lint.per-file-ignores]
+
+"tests/*" = [
+    "S101", # ignore use of assert
+    "ANN001", # ignore missing type annotation for self in method
+    'ANN201',  # ignore missing type annotation for self in method
+]
